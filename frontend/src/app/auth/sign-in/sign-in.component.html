@@ -1,0 +1,59 @@
+<mat-grid-list cols="3">
+    <mat-grid-tile></mat-grid-tile>
+
+    <!-- Writing markup for login starts -->
+    <mat-grid-tile class='login-element'>
+        <div class="login-container">
+
+            <!-- Template Header starts -->
+            <div class="login-box-header">
+              SHIGOTO
+                <img src="">
+            </div>
+            <!-- Template Header ends -->
+
+            <!-- Template Body starts -->
+            <div class="login-box-body">
+              <form #loginForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+                <div *ngIf="isLoginError" class="red-text center error-message">
+                    <i class="material-icons">error</i> Incorrect username or password
+                </div>
+                <!-- Markup for getting Username starts -->
+                <mat-grid-list cols="9" rowHeight="75px">
+                    <mat-grid-tile [rowspan]="1" class="login-icon">
+                        <mat-icon>lock</mat-icon>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="7">
+                        <mat-input-container class="justifier">
+                            <input matInput placeholder="Username" text="text" #UserName ngModel name="UserName" required>
+                        </mat-input-container>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <!-- Markup for getting Username ends -->
+
+                <!-- Markup for getting Password starts -->
+                <mat-grid-list cols="9" rowHeight="100px">
+                    <mat-grid-tile [rowspan]="1"  class="login-icon">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="7">
+                        <mat-input-container class="justifier">
+                            <input type="password" matInput placeholder="Password" text="password" #Password ngModel name="Password" placeholder="Password" required>
+                        </mat-input-container>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <!-- Markup for getting Password ends -->
+
+                <button mat-raised-button class="login-button" [disabled]="!loginForm.valid">
+                    <mat-icon>input</mat-icon> Login
+                </button>
+              </form>  
+            </div>
+            <!-- Template Body ends -->
+
+        </div>
+    </mat-grid-tile>
+    <!-- Writing markup for login ends -->
+    <mat-grid-tile></mat-grid-tile>
+
+</mat-grid-list>

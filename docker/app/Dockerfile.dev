@@ -12,7 +12,7 @@ WORKDIR $APP_PATH
 ADD Gemfile $APP_PATH
 ADD Gemfile.lock $APP_PATH
 
-RUN gem install bundler && bundle install --jobs 20 --retry 5 --without production
+RUN gem install bundler && bundle install --jobs 20 --retry 5 --without production --path vendor/bundle
 
 # COPY package.json yarn.lock ./
 # RUN yarn
