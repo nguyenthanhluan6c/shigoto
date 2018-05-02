@@ -14,4 +14,16 @@
 !/tmp/.keep
 
 .byebug_history
-.env
+
+# Ignore all assets, upload files.
+/public/assets/*
+/public/uploads/*
+
+/.env
+
+# Ignore docker db volumes.
+docker/db/volumes/*
+docker/redis/volumes/*
+docker/elasticsearch/volumes/*
+
+vendor/bundler/

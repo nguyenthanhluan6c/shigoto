@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: docker/mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    command: mysqld
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile.test
+    env_file:
+      app.env
+    environment:
+      RAILS_ENV: test
+    depends_on:
+      - mysql
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - /tmp/results:/results
+      - /tmp/coverage:/app/coverage

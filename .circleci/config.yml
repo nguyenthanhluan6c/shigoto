@@ -1,0 +1,72 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/server
+    docker:
+      - image: docker:17.11.0-ce-git
+        environment:
+          DOCKER_COMPOSE_VERSION: 1.18.0
+          COMPOSE_YML: docker-compose-test.yml
+          RAILS_ENV: test
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install docker-compose
+          command: |
+            apk add --no-cache py-pip
+            pip install docker-compose==${DOCKER_COMPOSE_VERSION}
+      - run:
+           name: Build mysql image to mount custom my.cnf
+           command: docker-compose -f $COMPOSE_YML build mysql
+      - run:
+          name: Launch the database on the background
+          command: docker-compose -f $COMPOSE_YML up mysql
+          background: true
+      - run:
+          name: docker-compose build for app
+          command: docker-compose -f $COMPOSE_YML build app
+      - run:
+          name: Run RuboCop
+          command: |
+            docker-compose -f $COMPOSE_YML run --rm -e RAILS_ENV=${RAILS_ENV} app \
+                           bundle exec rubocop spec -r rubocop/formatter/junit_formatter \
+                           --format RuboCop::Formatter::JUnitFormatter \
+                           -c .rubocop.yml \
+                           -o /results/rubocop.xml
+          when: always
+      - run:
+          name: Prepare for database
+          command: |
+            docker-compose -f $COMPOSE_YML run --rm -e RAILS_ENV=${RAILS_ENV} app \
+                           bundle exec rake db:create
+            docker-compose -f $COMPOSE_YML run --rm -e RAILS_ENV=${RAILS_ENV} app \
+                           bundle exec rake db:schema:load
+      - run:
+          name: Rspec
+          command: |
+            docker-compose -f $COMPOSE_YML run --rm -e RAILS_ENV=${RAILS_ENV} app \
+                           bundle exec rspec \
+                           --format progress \
+                           --format RspecJunitFormatter \
+                           --out /results/rspec.xml
+      - run:
+          name: Copy test results from docker containers
+          command: |
+            docker-compose -f $COMPOSE_YML up -d app
+            APP_CONTAINER_ID=$(docker ps -f name=app -f status=running --format="{{.ID}}")
+            docker cp ${APP_CONTAINER_ID}:results /tmp/
+            docker cp ${APP_CONTAINER_ID}:/app/coverage /tmp/
+          when: always
+      - store_test_results:
+          path: /tmp/results
+      - store_artifacts:
+          path: /tmp/
+
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
