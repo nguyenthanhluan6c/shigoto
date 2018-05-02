@@ -1,0 +1,14 @@
+FROM node:8
+
+ENV FRONTEND_PATH /frontend_root
+
+WORKDIR $FRONTEND_PATH
+
+ADD package.json $FRONTEND_PATH
+ADD package-lock.json $FRONTEND_PATH
+
+RUN npm install --quiet
+
+COPY . $FRONTEND_PATH
+
+EXPOSE 4200

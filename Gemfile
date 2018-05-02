@@ -16,6 +16,13 @@ gem 'puma', '~> 3.7'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
+gem 'redis', '~> 3.0'
+gem "redis-rack", git: "https://github.com/redis-store/redis-rack.git", branch: "master"
+gem "redis-actionpack", git: "https://github.com/redis-store/redis-actionpack.git", branch: "master"
+gem "redis-rails", git: "https://github.com/redis-store/redis-rails.git", branch: "master"
+gem "redis-namespace"
+
+gem 'sidekiq'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
