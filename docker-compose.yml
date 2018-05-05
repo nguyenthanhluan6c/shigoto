@@ -36,7 +36,7 @@ services:
       - db
       - redis
       - elasticsearch
-    command: bundle exec sidekiq -C config/sidekiq2.yml
+    command: bundle install --path vendor/bundle && bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - .:/rails_root
     env_file:
@@ -48,7 +48,7 @@ services:
       dockerfile: docker/app/Dockerfile.dev
     depends_on:
       - 'redis'
-    command: bundle exec puma -p 28080 -C config/puma.rb cable/config.ru
+    command: bundle install --path vendor/bundle && bundle exec puma -p 28080 -C config/puma.rb cable/config.ru
     ports:
       - '28080:28080'
     volumes:
@@ -64,7 +64,7 @@ services:
       - redis
       - sidekiq
       - elasticsearch
-    command: /bin/sh -c "rm -f /rails_root/tmp/pids/server.pid; bundle exec rails s"
+    command: /bin/sh -c "rm -f /rails_root/tmp/pids/server.pid; bundle install --path vendor/bundle; bundle exec rails s"
     stdin_open: true
     tty: true
     volumes:
@@ -83,6 +83,7 @@ services:
       - '4200:4200'
     volumes:
       - ./frontend:/frontend_root
+      - ./frontend/node_modules:/frontend_root/node_modules
     env_file:
       - docker/frontend/.env
 

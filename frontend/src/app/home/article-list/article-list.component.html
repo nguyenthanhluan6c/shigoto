@@ -1,0 +1,10 @@
+<p>
+  article-list works!
+
+  <app-article 
+    *ngFor="let article of articles | async"
+    [id]="article.id" 
+    [title]="article.title" 
+    [content]="article.content" 
+  ></app-article>
+</p>
