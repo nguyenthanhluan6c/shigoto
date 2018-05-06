@@ -1,0 +1,49 @@
+en:
+  dictionary:
+    user_deleted: &user_deleted "User has been deleted or not exists."
+    email_wrong: &email_wrong "There is an error in the email address."
+    video_deleted: &video_deleted "Video has been deleted or not exists."
+  serializers:
+    api:
+      v1:
+        auth:
+          reset_password:
+            record_not_found: Password reset token is incorrect.
+          send_reset_password_token:
+            record_not_found: *email_wrong
+          sessions:
+            record_not_found: *user_deleted
+          users:
+            record_not_found: *email_wrong
+          logout:
+            record_not_found: *user_deleted
+        me:
+          personal:
+            conversations:
+              record_not_found: *user_deleted
+        profile:
+          offers:
+            record_not_found: You are not yet curious on this user
+          user_profiles:
+            record_not_found: *user_deleted
+          user_profile_reports:
+            record_not_found: *user_deleted
+          videos:
+            record_not_found: *user_deleted
+        timeline:
+          video_likes:
+            record_not_found: *video_deleted
+          like_video:
+            notices:
+              record_not_found: *video_deleted
+          video_reports:
+            record_not_found: *video_deleted
+          videos:
+            record_not_found: *video_deleted
+          gift_histories:
+            record_not_found: *video_deleted
+        authorize:
+          record_not_found: *user_deleted
+        my_profile:
+          device_tokens:
+            record_not_found: Device id not found

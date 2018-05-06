@@ -1,0 +1,297 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+vi:
+  dictionary:
+    token_mismatched: &token_mismatched Dữ liệu đã bị thay đổi, hãy kiểm tra lại
+  api_validation:
+    # resources:
+    #   object invalid
+    # fields:
+    #   table
+    #     column
+    # codes:
+    #   error code
+    resources:
+      user: user
+      offer: offer
+      user_profile: user_profile
+      device_token: device_token
+      account_kit_detail: account_kit_detail
+    fields:
+      user:
+        email: email
+        password: mật khẩu
+        password_confirmation: xác nhận mật khẩu
+        current_password: mật khẩu hiện tại
+        user_profile:
+          name: tên
+          latitude: latitude
+          longitude: longitude
+      offer:
+        offered_id: offered_id
+        offerer_id: offerer_id
+      user_profile:
+        experience_year: experience_year
+        experience_month: experience_month
+      device_token:
+        token: token
+      account_kit_detail:
+        passcode: Mật khẩu
+        passcode_confirmation: Mật khẩu xác nhận
+    full_messages:
+      user:
+        current_password: Đang có lỗi với mật khẩu hiện tại.
+      account_kit_detail:
+        passcode_confirmation: Không thể xác nhận mật khẩu
+    codes:
+      blank: 2000
+      taken: 2001
+      confirmation: 2002
+      invalid: 2003
+      less_than_or_equal_to: 2004
+      greater_than_or_equal_to: 2005
+      too_short: 2006
+      self_offer: 2007
+      wrong_length: 2008
+      not_a_number: 2009
+  api_error:
+    # module:
+    #   error:
+    #     code:
+    #     message:
+    client:
+      not_found:
+        code: 404
+        message: Không tìm thấy
+      invalid_access_token:
+        code: 190
+        message: Mã xác thực không chính xác
+      access_deny:
+        code: 401
+        message: "Truy cập bị từ chối"
+      app_expired:
+        code: 1001
+        message: "Ứng dụng đã lỗi thời"
+    params:
+      required:
+        code: 1000
+        message: Yêu cầu tham số
+      missing:
+        code: 3002
+        message: Tham số bị thiếu hoặc không hợp lệ.
+    server:
+      internal_error:
+        code: 500
+        message: "Internal Server Error"
+      bad_gateway:
+        code: 502
+        message: "Bad Gateway"
+    authorize:
+      doorkeeper_error:
+        code: 401
+        message: "Doorkeeper::Errors::InvalidTokenStrategy"
+      invalid_confirmation_token:
+        code: 2601
+        message: Mã xác nhận sai
+      user_activated:
+        code: 2603
+        message: Người dùng đã kích hoạt
+      user_inactive:
+        code: 2602
+        message: Người dùng không hoạt động
+      token_expired:
+        code: 2603
+        message: Mã truy cập đã hết hạn
+      token_unknown:
+        code: 2604
+        message: Mã truy cập không hợp lệ
+      token_revoked:
+        code: 2605
+        message: Mã thông báo truy cập bị thu hồi
+      unauthorized:
+        code: 2606
+        message: (Địa chỉ E-mail hoặc mật khẩu) không chính xác.
+    database:
+      user_profile_report_exist:
+        code: 2701
+        message: Bạn đã báo cáo tài khoản này
+      video_report_exist:
+        code: 2702
+        message: Bạn đã báo cáo video này
+      offer_exist:
+        code: 2703
+        message: Bạn đang quan tâm người này rồi
+      offer_not_exist:
+        code: 2704
+        message: Người dùng đã hủy liên kết hoặc không tồn tại
+      user_profile_not_exist:
+        code: 2705
+        message: Người dùng đã bị xóa hoặc không tồn tại.
+    offer:
+      not_accepted:
+        code: 1102
+        message: Cả hai phải quan tâm lẫn nhau
+      can_not_unaccept:
+        code: 1103
+        message: Người dùng này cũng đang quan tâm bạn, không thể huỷ quan tâm
+    gift:
+      not_enough_point:
+        code: 2801
+        message: Không đủ point để mua quà tặng.
+      gift_token_mismatched:
+        code: 2802
+        message: *token_mismatched
+    exchange:
+      not_enough_note:
+        code: 2803
+        message: Không đủ note
+      note_ticket_conversion_token_mismatched:
+        code: 2804
+        message: *token_mismatched
+      token_mismatched:
+        code: 2805
+        message: *token_mismatched
+      stripe_payout_error:
+        code: 2806
+        message: Api thanh toán của Stripe bị lỗi.
+      stripe_transfer_error:
+        code: 2807
+        message: Api chuyển tiền của Stripe bị lỗi.
+      paypal_api_error:
+        code: 3004
+        message: Giao dịch thất bại, vui lòng thực hiện lại sau!
+      consecutive_transactions:
+        code: 3005
+        message: Bạn chỉ có thể thực hiện giao dịch một lần mỗi tuần. Bạn đã đổi tiền thành công trước đó.
+      not_enough_minimum_note_points:
+        code: 3006
+        message: Không đủ %{min_note_points} note tối thiểu cho mỗi lần giao dịch
+      exceed_maximum_note_points:
+        code: 3007
+        message: Vượt quá %{max_note_points} note tối đa cho mỗi lần giao dịch
+    payment:
+      stripe_api_error:
+        api_connection_error: 2901
+        api_error: 2902
+        authentication_error: 2903
+        card_error: 2904
+        idempotency_error: 2905
+        invalid_request_error: 2906
+        rate_limit_error: 2907
+        validation_error: 2908
+      ticket_token_mismatched:
+        code : 2909
+        message: *token_mismatched
+    appotapay:
+      not_exists:
+        code: 1039
+        message: Thẻ không tồn tại hoặc đã được sử dụng!
+      not_support:
+        code: 1011
+        message: Hệ thống không hỗ trợ loại thẻ này!
+      amount_not_match:
+        code: 1004
+        message: Số tiền nạp vào không phù hợp
+      token_mismatched:
+        code: 1003
+        message: *token_mismatched
+      input_invalid:
+        code: 1002
+        message: Thông tin nhập vào quá dài
+      request_invalid:
+        code: 1006
+        message: Yêu cầu không hợp lệ
+      not_active:
+        code: 1007
+        message: Hệ thống chưa được kích hoạt hoặc không thể xuất thẻ
+      invalid_card:
+        code: 1010
+        message: Định dạng mã thẻ cào không đúng!
+    in_app_histories:
+      package_name_mismatched:
+        code: 1008
+        message: Không tìm thấy ứng dụng với package name đã gửi.
+      token_and_product_id_mismatched:
+        code: 1009
+        message: Token không khớp với product ID.
+    account_kit:
+      authorization_code_invalid:
+        code: 3100
+        message: Mã ủy quyền không hợp lệ.
+      authorization_code_expired:
+        code: 3101
+        message: Mã ủy quyền đã hết hạn.
+      access_token_invalid:
+        code: 3102
+        message: Mã truy cập không hợp lệ.
+      phone_number_mismatched:
+        code: 3103
+        message: Số điện thoại hiện tại không khớp với số điện thoại đã xác minh.
+      phone_number_not_verified:
+        code: 3104
+        message: Số điện thoại chưa xác minh.
+      passcode_not_set:
+        code: 3105
+        message: Mật khẩu chưa thiết lập.
+      passcode_unauthorized:
+        code: 3106
+        message: Mật khẩu không chính xác.
+      verified_phone_token_invalid:
+        code: 3107
+        message: Mã xác nhận số điện thoại không hợp lệ.
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      extension_whitelist_error: Invalid upload file type
+      size_exceed: &size_exceed "Upload file size should be less than 5MB."
+      extension_accept: &extension_accept "Only image file with extension: .jpg, .jpeg or .png is allowed."
+      currency_error: "Only %{currency} accepted with %{payment_method}"
+      payment_method_error: "%{payment_method} not accepted %{currency} currency"
+      appotapay_amount_conversion_invalid: Appotapay only accepted this amount(10000, 20000, 50000, 100000, 200000, 300000, 500000).
+      accepted: phải được đồng ý
+      blank: không thể để trắng
+      present: cần phải để trắng
+      confirmation: không khớp với xác nhận
+      empty: không thể rỗng
+      equal_to: phải bằng %{count}
+      even: phải là số chẵn
+      exclusion: đã được giành trước
+      greater_than: phải lớn hơn %{count}
+      greater_than_or_equal_to: phải lớn hơn hoặc bằng %{count}
+      inclusion: không có trong danh sách
+      invalid: không hợp lệ
+      less_than: phải nhỏ hơn %{count}
+      less_than_or_equal_to: phải nhỏ hơn hoặc bằng %{count}
+      not_a_number: không phải là số
+      not_an_integer: phải là một số nguyên
+      odd: phải là số lẻ
+      taken: đã có
+      too_long: quá dài (tối đa %{count} ký tự)
+      too_short: quá ngắn (tối thiểu %{count} ký tự)
+      wrong_length: độ dài không đúng (phải là %{count} ký tự)
+      other_than: cần phải khác %{count}
+      size_exceed: &size_exceed "Dung lượng tập tin tải lên cần nhỏ hơn 5MB."
+      extension_accept: &extension_accept "Chỉ các tập tin với đuôi: .jpg, .jpeg or .png là hợp lệ."
+      extension_whitelist_error: Kiểu file không đúng
+      currency_error: "Chỉ tiền tệ %{currency} hợp lệ với %{payment_method}"
+      payment_method_error: "%{payment_method} không hỗ trợ tiền tệ %{currency}"
+      appotapay_amount_conversion_invalid: Appota chỉ hỗ trợ số tiền giao dịch này(10000, 20000, 50000, 100000, 200000, 300000, 500000).

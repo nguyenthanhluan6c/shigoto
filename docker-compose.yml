@@ -36,7 +36,7 @@ services:
       - db
       - redis
       - elasticsearch
-    command: bundle install --path vendor/bundle && bundle exec sidekiq -C config/sidekiq.yml
+    command: /bin/sh -c "bundle install --path vendor/bundle && bundle exec sidekiq -C config/sidekiq.yml"
     volumes:
       - .:/rails_root
     env_file:
@@ -48,7 +48,7 @@ services:
       dockerfile: docker/app/Dockerfile.dev
     depends_on:
       - 'redis'
-    command: bundle install --path vendor/bundle && bundle exec puma -p 28080 -C config/puma.rb cable/config.ru
+    command: /bin/sh -c "bundle install --path vendor/bundle && bundle exec puma -p 28080 -C config/puma.rb cable/config.ru"
     ports:
       - '28080:28080'
     volumes:

@@ -1,24 +1,17 @@
-class Api::V1::Auth::SessionsController < Api::V1::BaseController
+class Api::V1::Auth::SessionsController < Api::V1::Base::BaseController
   include Api::V1::Auth::DoorkeeperAuthorize
 
   def create
     if authorize_response.status == :unauthorized
-      render_error
+      raise APIError::Authorize::Unauthorized
     end
 
-    token = authorize_response.token
-    render_success data:    {
-      token: token.token,
-      refresh_token: token.refresh_token,
-      expires_in: token.expires_in,
-      created_at: token.created_at,
-      user_id: current_resouce.id,
-      user_email: current_resouce.email,
-      name: current_resouce.name
-    }
+    authorize_response_with_confirmed!
+
+    render_success data: Api::V1::Auth::LoginSerializer.new(current_resouce, authorize_response.token).generate
 
   rescue Doorkeeper::Errors::DoorkeeperError => e
-    render_error
+    raise APIError::Authorize::DoorkeeperError
   end
 
   def revoke
@@ -29,5 +22,11 @@ class Api::V1::Auth::SessionsController < Api::V1::BaseController
   private
   def current_resouce
     @current_resouce ||= User.find authorize_response.token.resource_owner_id
+  end
+
+  def authorize_response_with_confirmed!
+    if current_resouce.respond_to?(:confirmed?) && !current_resouce.confirmed?
+      raise APIError::Authorize::UserInactive
+    end
   end
 end

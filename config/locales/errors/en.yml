@@ -1,0 +1,297 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  dictionary:
+    token_mismatched: &token_mismatched The data has been changed, please check again!
+  api_validation:
+    # resources:
+    #   object invalid
+    # fields:
+    #   table
+    #     column
+    # codes:
+    #   error code
+    resources:
+      user: user
+      offer: offer
+      user_profile: user_profile
+      device_token: device_token
+      account_kit_detail: account_kit_detail
+    fields:
+      user:
+        email: email
+        password: password
+        password_confirmation: password_confirmation
+        current_password: current_password
+        user_profile:
+          name: name
+          latitude: latitude
+          longitude: longitude
+      offer:
+        offered_id: offered_id
+        offerer_id: offerer_id
+      user_profile:
+        experience_year: experience_year
+        experience_month: experience_month
+      device_token:
+        token: token
+      account_kit_detail:
+        passcode: passcode
+        passcode_confirmation: passcode_confirmation
+    full_messages:
+      user:
+        current_password: There is an error in the Current password.
+      account_kit_detail:
+        passcode_confirmation: Failed to confirm passcode
+    codes:
+      blank: 2000
+      taken: 2001
+      confirmation: 2002
+      invalid: 2003
+      less_than_or_equal_to: 2004
+      greater_than_or_equal_to: 2005
+      too_short: 2006
+      self_offer: 2007
+      wrong_length: 2008
+      not_a_number: 2009
+  api_error:
+    # module:
+    #   error:
+    #     code:
+    #     message:
+    client:
+      not_found:
+        code: 404
+        message: "Not Found"
+      invalid_access_token:
+        code: 190
+        message: "Invalid OAuth access token"
+      access_deny:
+        code: 401
+        message: "Access Denied"
+      app_expired:
+        code: 1001
+        message: "The application is out of date"
+    params:
+      required:
+        code: 1000
+        message: "Params Required"
+      missing:
+        code: 3002
+        message: Missing or invalid parameter.
+    server:
+      internal_error:
+        code: 500
+        message: "Internal Server Error"
+      bad_gateway:
+        code: 502
+        message: "Bad Gateway"
+    authorize:
+      doorkeeper_error:
+        code: 401
+        message: "Doorkeeper::Errors::InvalidTokenStrategy"
+      invalid_confirmation_token:
+        code: 2601
+        message: Invalid code
+      user_activated:
+        code: 2603
+        message: User Activated
+      user_inactive:
+        code: 2602
+        message: User inactive
+      token_expired:
+        code: 2603
+        message: The access token expired
+      token_unknown:
+        code: 2604
+        message: The access token is invalid
+      token_revoked:
+        code: 2605
+        message: The access token is revoked
+      unauthorized:
+        code: 124
+        message: (E-mail address or password) is incorrect.
+    database:
+      user_profile_report_exist:
+        code: 2701
+        message: You've reported to this account
+      video_report_exist:
+        code: 2702
+        message: You've reported to this video
+      offer_exist:
+        code: 2703
+        message: You are currently curious this user
+      offer_not_exist:
+        code: 2704
+        message: The user has canceled offer or does not exist
+      user_profile_not_exist:
+        code: 2705
+        message: The user has been deleted or does not exist
+    offer:
+      not_accepted:
+        code: 1102
+        message: Both users have to be curious each other
+      can_not_unaccept:
+        code: 1103
+        message: This user is also curious on you, you can not be incurious now
+    gift:
+      not_enough_point:
+        code: 2801
+        message: Not enough points
+      gift_token_mismatched:
+        code: 2802
+        message: *token_mismatched
+    exchange:
+      not_enough_note:
+        code: 2803
+        message: Not enough notes
+      note_ticket_conversion_token_mismatched:
+        code: 2804
+        message: *token_mismatched
+      token_mismatched:
+        code: 2805
+        message: *token_mismatched
+      stripe_payout_error:
+        code: 2806
+        message: Stripe payout api error.
+      stripe_transfer_error:
+        code: 2807
+        message: Stripe transfer api error.
+      paypal_api_error:
+        code: 3004
+        message: The exchange failed, please try again later!
+      consecutive_transactions:
+        code: 3005
+        message: You can only perform one transaction per week. Your exchange was already successful.
+      not_enough_minimum_note_points:
+        code: 3006
+        message: Your account must reach minimum %{min_note_points} notes per transaction.
+      exceed_maximum_note_points:
+        code: 3007
+        message: Your account must not exceed %{max_note_points} notes per transaction.
+    payment:
+      stripe_api_error:
+        api_connection_error: 2901
+        api_error: 2902
+        authentication_error: 2903
+        card_error: 2904
+        idempotency_error: 2905
+        invalid_request_error: 2906
+        rate_limit_error: 2907
+        validation_error: 2908
+      ticket_token_mismatched:
+        code : 2909
+        message: *token_mismatched
+    appotapay:
+      not_exists:
+        code: 1039
+        message: The card does not exist
+      not_support:
+        code: 1011
+        message: Do not support this vendor
+      amount_not_match:
+        code: 1004
+        message: Amount is not match
+      token_mismatched:
+        code: 1003
+        message: *token_mismatched
+      input_invalid:
+        code: 1002
+        message: The input is too long
+      request_invalid:
+        code: 1006
+        message: The request is invalid
+      not_active:
+        code: 1007
+        message: The partner is not active or can not cashout
+      invalid_card:
+        code: 1010
+        message: The card format incorrect!
+    in_app_histories:
+      package_name_mismatched:
+        code: 1008
+        message: No application was found for the given package name.
+      token_and_product_id_mismatched:
+        code: 1009
+        message: The token does not match the product ID.
+    account_kit:
+      authorization_code_invalid:
+        code: 3100
+        message: Invalid verification code.
+      authorization_code_expired:
+        code: 3101
+        message: This authorization code has expired.
+      access_token_invalid:
+        code: 3102
+        message: The access token is invalid.
+      phone_number_mismatched:
+        code: 3103
+        message: The current phone number mismatched with verified phone number.
+      phone_number_not_verified:
+        code: 3104
+        message: The phone number is not verified.
+      passcode_not_set:
+        code: 3105
+        message: The passcode is not set.
+      passcode_unauthorized:
+        code: 3106
+        message: The passcode is unauthorized.
+      verified_phone_token_invalid:
+        code: 3107
+        message: The verified phone token is invalid.
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      extension_whitelist_error: Invalid upload file type
+      size_exceed: &size_exceed "Upload file size should be less than 5MB."
+      extension_accept: &extension_accept "Only image file with extension: .jpg, .jpeg or .png is allowed."
+      currency_error: "Only %{currency} accepted with %{payment_method}"
+      payment_method_error: "%{payment_method} not accepted %{currency} currency"
+      appotapay_amount_conversion_invalid: Appotapay only accepted this amount(10000, 20000, 50000, 100000, 200000, 300000, 500000).
+      accepted: phải được đồng ý
+      blank: không thể để trắng
+      present: cần phải để trắng
+      confirmation: không khớp với xác nhận
+      empty: không thể rỗng
+      equal_to: phải bằng %{count}
+      even: phải là số chẵn
+      exclusion: đã được giành trước
+      greater_than: phải lớn hơn %{count}
+      greater_than_or_equal_to: phải lớn hơn hoặc bằng %{count}
+      inclusion: không có trong danh sách
+      invalid: không hợp lệ
+      less_than: phải nhỏ hơn %{count}
+      less_than_or_equal_to: phải nhỏ hơn hoặc bằng %{count}
+      not_a_number: không phải là số
+      not_an_integer: phải là một số nguyên
+      odd: phải là số lẻ
+      taken: đã có
+      too_long: quá dài (tối đa %{count} ký tự)
+      too_short: quá ngắn (tối thiểu %{count} ký tự)
+      wrong_length: độ dài không đúng (phải là %{count} ký tự)
+      other_than: cần phải khác %{count}
+      size_exceed: &size_exceed "Dung lượng tập tin tải lên cần nhỏ hơn 5MB."
+      extension_accept: &extension_accept "Chỉ các tập tin với đuôi: .jpg, .jpeg or .png là hợp lệ."
+      extension_whitelist_error: Kiểu file không đúng
+      currency_error: "Chỉ tiền tệ %{currency} hợp lệ với %{payment_method}"
+      payment_method_error: "%{payment_method} không hỗ trợ tiền tệ %{currency}"
+      appotapay_amount_conversion_invalid: Appota chỉ hỗ trợ số tiền giao dịch này(10000, 20000, 50000, 100000, 200000, 300000, 500000).
