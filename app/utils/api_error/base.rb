@@ -53,9 +53,11 @@ module APIError
 
   module Authorize
     class TokenExpired < APIError::Base
+      KEY = :token_expired
     end
 
     class TokenUnknown < APIError::Base
+      KEY = :token_unknown
     end
 
     class DoorkeeperError < APIError::Base
@@ -71,6 +73,7 @@ module APIError
     end
 
     class TokenRevoked < APIError::Base
+      KEY = :token_revoked
     end
 
     class Unauthorized < APIError::Base

@@ -11,7 +11,11 @@ import { HomeModule } from './home/module';
 import { appRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-
+import { TokenInterceptor } from './base-api/token.interceptor';
+import { CoreModule } from './core/module';
+import { NgProgressModule, NgProgress } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { NgProgressRouterModule } from '@ngx-progressbar/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,11 +25,14 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule,
+    NgProgressRouterModule,
     MatButtonModule, MatCheckboxModule, MatGridListModule, MatInputModule, MatIconModule,
-    AuthModule,
+    AuthModule, CoreModule,
     HomeModule,
   ],
-  providers: [],
+  providers: [TokenInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
