@@ -16,7 +16,8 @@
             <div class="login-box-body">
               <form #loginForm="ngForm" class="col s12 white" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
                 <div *ngIf="isLoginError" class="red-text center error-message">
-                    <i class="material-icons">error</i> Incorrect username or password
+                    <i class="material-icons">error</i>
+                    {{ error.errors[0].message }}
                 </div>
                 <!-- Markup for getting Username starts -->
                 <mat-grid-list cols="9" rowHeight="75px">
@@ -47,7 +48,7 @@
                 <button mat-raised-button class="login-button" [disabled]="!loginForm.valid">
                     <mat-icon>input</mat-icon> Login
                 </button>
-              </form>  
+              </form>
             </div>
             <!-- Template Body ends -->
 

@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-
-import { IArticleList, IResponse, IArticle, fromServer } from '../model';
-import { HeaderBasicService } from '../../auth/services/header-basic.service';
+import 'rxjs/add/operator/catch';
+import { IArticleList, IArticleListResponse, IArticle, fromServer } from '../model';
+import { BackendApiService } from '../../base-api/backend-api-service';
 
 @Injectable()
-export class ArticleService {
-  readonly apiUrl = environment.apiUrl;
+export class ArticleService extends BackendApiService{
 
-  constructor(private http: HttpClient, private headerBasicService: HeaderBasicService) { }
-
-  getAll(): Observable<IArticle[]>{
-  	var reqHeader = this.headerBasicService.getHeaders();
-  	return this.http.get<IResponse>(`${this.apiUrl}/articles`, {headers : reqHeader})
-      .map(response => response.data.articles.map(fromServer));
+  getAll(): Observable<IArticle[]> {
+    return this.http.get(`/articles`)
+      .map((response: IArticleListResponse) => response.data.articles.map(fromServer))
+      .catch(this.errorHandler.handle)
   }
-     
 }
