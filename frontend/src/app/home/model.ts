@@ -1,7 +1,6 @@
-export interface IResponse {
-  data: IArticleList;
-  success: boolean;
-}
+import { IResponse } from "../base-api/base-api.model"
+
+export interface IArticleListResponse extends IResponse<IArticleList> { }
 
 export interface IArticleList {
   articles: IArticle[];
