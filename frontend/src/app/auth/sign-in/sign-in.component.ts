@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { IBaseApiErrorResponse, IBaseApiError } from '../models/base-api.model';
+import { IBaseApiErrorResponse, IBaseApiError } from '../../base-api/base-api.model';
 
 @Component({
   selector: 'app-sign-in',

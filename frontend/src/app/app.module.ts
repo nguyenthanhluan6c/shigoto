@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { NgProgressModule, NgProgress } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { NgProgressRouterModule } from '@ngx-progressbar/router';
+import { ArticleModule } from './article/module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NgProgressRouterModule } from '@ngx-progressbar/router';
     MatButtonModule, MatCheckboxModule, MatGridListModule, MatInputModule, MatIconModule,
     AuthModule,
     HomeModule,
+    ArticleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
