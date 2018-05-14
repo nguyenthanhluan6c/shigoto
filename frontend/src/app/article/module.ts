@@ -19,13 +19,15 @@ import { ArticleAPIActions } from './api/actions';
 import { ArticleAPIEpics } from './api/epics';
 import { StoreModule } from '../store/module';
 
+import { NgReduxFormModule } from '@angular-redux/form';
 @NgModule({
   declarations: [
     IndexComponent, ShowComponent, EditComponent, NewComponent, DeleteComponent,
     ArticleComponent, ArticleListComponent
   ],
   exports: [],
-  imports: [CommonModule, CoreModule, BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule, RouterModule, StoreModule],
+
+  imports: [CommonModule, CoreModule, BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule, RouterModule, StoreModule, NgReduxFormModule],
   providers: [
     HttpClientModule,
     HeaderBasicService,

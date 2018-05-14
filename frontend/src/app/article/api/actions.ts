@@ -23,6 +23,15 @@ export class ArticleAPIActions {
   static readonly LOAD_ITEM_STARTED = 'LOAD_ITEM_STARTED';
   static readonly LOAD_ITEM_SUCCEEDED = 'LOAD_ITEM_SUCCEEDED';
 
+  static readonly SUBMIT_NEW_FORM = 'SUBMIT_NEW_FORM';
+  static readonly SUBMIT_NEW_FORM_SUCCEEDED = 'SUBMIT_NEW_FORM_SUCCEEDED';
+
+  static readonly LOAD_ITEM_EDIT = 'LOAD_ITEM_EDIT';
+  static readonly LOAD_ITEM_EDIT_STARTED = 'LOAD_ITEM_EDIT_STARTED';
+  static readonly LOAD_ITEM_EDIT_SUCCEEDED = 'LOAD_ITEM_EDIT_SUCCEEDED';
+  static readonly SUBMIT_EIDT_FORM = 'SUBMIT_EIDT_FORM';
+  static readonly SUBMIT_EDIT_FORM_SUCCEEDED = 'SUBMIT_EDIT_FORM_SUCCEEDED';
+
   // INDEX
   @dispatch()
   loadArticles = (): ArticleAPIAction => ({
@@ -83,4 +92,53 @@ export class ArticleAPIActions {
     meta: null,
     payload,
   });
+
+  //NEW
+  @dispatch()
+  submitFormNew = (value): ArticleAPIAction => ({
+    type: ArticleAPIActions.SUBMIT_NEW_FORM,
+    meta: null,
+    payload: { value: value },
+  });
+
+  submitFormNewSucceeded = (payload: Payload): ArticleAPIAction => ({
+    type: ArticleAPIActions.SUBMIT_NEW_FORM_SUCCEEDED,
+    meta: null,
+    payload,
+  });
+
+  //EDIT
+
+  @dispatch()
+  loadItemEdit = (id): ArticleAPIAction => ({
+    type: ArticleAPIActions.LOAD_ITEM_EDIT,
+    meta: { id: id },
+    payload: null,
+  });
+
+  loadItemEditStarted = (): ArticleAPIAction => ({
+    type: ArticleAPIActions.LOAD_ITEM_EDIT_STARTED,
+    meta: null,
+    payload: null,
+  });
+
+  loadItemEditSucceeded = (payload: Payload): ArticleAPIAction => ({
+    type: ArticleAPIActions.LOAD_ITEM_EDIT_SUCCEEDED,
+    meta: null,
+    payload,
+  });
+
+  @dispatch()
+  submitFormEdit = (value): ArticleAPIAction => ({
+    type: ArticleAPIActions.SUBMIT_EIDT_FORM,
+    meta: null,
+    payload: { value: value },
+  });
+
+  submitFormEditSucceeded = (payload: Payload): ArticleAPIAction => ({
+    type: ArticleAPIActions.SUBMIT_EDIT_FORM_SUCCEEDED,
+    meta: null,
+    payload,
+  });
+
 }

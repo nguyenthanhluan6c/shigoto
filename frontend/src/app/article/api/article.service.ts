@@ -20,15 +20,13 @@ export class ArticleService extends BackendApiService {
       .catch(this.errorHandler.handle)
   }
 
-  create(title, content) {
-    let data = { title, content };
+  create(data) {
     return this.http.post(`/articles`, data)
       .catch(this.errorHandler.handle)
   }
 
-  update(id, title, content) {
-    let data = { id, title, content };
-    return this.http.put(`/articles/${id}`, data)
+  update(data) {
+    return this.http.put(`/articles/${data.id}`, data)
       .catch(this.errorHandler.handle)
   }
 
