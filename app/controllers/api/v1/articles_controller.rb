@@ -10,7 +10,7 @@ class Api::V1::ArticlesController < Api::V1::Base::AuthorizeController
   end
 
   def edit
-    article = Article.find params[:id]
+    article = current_user.articles.find params[:id]
     render_success data: Api::V1::ArticleSerializer.new(article)
   end
 
@@ -26,12 +26,13 @@ class Api::V1::ArticlesController < Api::V1::Base::AuthorizeController
   end
 
   def destroy
-    article = Article.find params[:id]
+    article = current_user.articles.find params[:id]
     article.destroy!
     render_success
   end
 
   private
+
   def article_params
     params.permit(:id, :title, :content)
   end

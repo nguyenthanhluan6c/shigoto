@@ -6,6 +6,8 @@ import { Action } from 'redux';
 export interface IArticleState {
   index: IArticleIndexState;
   show: IArticleShowState;
+  new: IArticleNewState;
+  edit: IArticleEditState;
 }
 
 export interface IArticleIndexState {
@@ -14,6 +16,14 @@ export interface IArticleIndexState {
 
 export interface IArticleShowState {
   article: IArticle;
+}
+
+export interface IArticleNewState {
+  formNew: any;
+}
+export interface IArticleEditState {
+  article: IArticle;
+  formEdit: any;
 }
 
 const INITIAL_STATE_INDEX: IArticleIndexState = {
@@ -36,9 +46,31 @@ const INITIAL_STATE_SHOW: IArticleShowState = {
   }
 }
 
+const INITIAL_STATE_NEW: IArticleNewState = {
+  formNew: {
+    title: null,
+    content: null,
+  }
+}
+
+const INITIAL_STATE_EDIT: IArticleEditState = {
+  article: {
+    id: null,
+    title: null,
+    content: null,
+  },
+  formEdit: {
+    id: null,
+    title: null,
+    content: null,
+  }
+}
+
 const INITIAL_STATE: IArticleState = {
   index: INITIAL_STATE_INDEX,
-  show: INITIAL_STATE_SHOW
+  show: INITIAL_STATE_SHOW,
+  new: INITIAL_STATE_NEW,
+  edit: INITIAL_STATE_EDIT,
 }
 
 // A higher-order reducer: accepts an animal type and returns a reducer
@@ -50,7 +82,7 @@ export function createArticleAPIReducer() {
     const action = a as ArticleAPIAction;
 
     switch (action.type) {
-      case ArticleAPIActions.LOAD_STARTED:
+      case ArticleAPIActions.LOAD_ITEMS_STARTED:
         return {
           ...state,
           index: INITIAL_STATE_INDEX
@@ -60,7 +92,7 @@ export function createArticleAPIReducer() {
           ...state,
           show: INITIAL_STATE_SHOW
         };
-      case ArticleAPIActions.LOAD_SUCCEEDED:
+      case ArticleAPIActions.LOAD_ITEMS_SUCCEEDED:
         return {
           ...state,
           index: {
@@ -82,7 +114,16 @@ export function createArticleAPIReducer() {
             article: action.payload
           }
         };
-      case ArticleAPIActions.LOAD_FAILED:
+
+      case ArticleAPIActions.LOAD_ITEM_EDIT_SUCCEEDED:
+        return {
+          ...state,
+          edit: {
+            article: action.payload,
+            formEdit: action.payload,
+          }
+        };
+      case ArticleAPIActions.LOAD_ITEMS_FAILED:
         return {
           ...state,
           index: {

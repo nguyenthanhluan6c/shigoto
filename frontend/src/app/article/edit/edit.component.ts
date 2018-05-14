@@ -1,58 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../api/article.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { select$, select } from '@angular-redux/store';
+import { ArticleAPIActions } from '../api/actions';
+import { IArticle } from '../../home/model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  styleUrls: ['./edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditComponent implements OnInit {
-  myForm: FormGroup;
-  article: any;
-  constructor(private articleService: ArticleService, private route: ActivatedRoute,
-    private router: Router, private fb: FormBuilder) {
-    this.createForm();
+  @select(['article', 'edit', 'article'])
+  readonly article$: Observable<IArticle>
+  constructor(private actions: ArticleAPIActions, private route: ActivatedRoute) {
 
   }
 
-  createForm() {
-    this.myForm = this.fb.group({
-      id: ['', Validators.required],
-      title: ['', Validators.required],
-      content: ['']
-    });
-  }
+  // update(form) {
+  //   let { title, content } = form.value
+  //   this.route.params.subscribe(params => {
+  //     this.articleService.update(params['id'], title, content)
+  //       .subscribe(res => {
+  //         this.router.navigate(['articles/', params['id']]);
+  //       });
+  //   });
+  // }
 
-  update(form) {
-    let { title, content } = form.value
-    this.route.params.subscribe(params => {
-      this.articleService.update(params['id'], title, content)
-        .subscribe(res => {
-          this.router.navigate(['articles/', params['id']]);
-        });
-    });
+  submit(form) {
+    this.actions.submitFormEdit(form.value)
   }
-
 
   delete(id) {
-    this.route.params.subscribe(params => {
-      this.articleService.delete(id)
-        .subscribe(res => {
-          if (res.success) {
-            this.router.navigate(['articles']);
-          }
-        });
-    });
+    // this.route.params.subscribe(params => {
+    //   this.articleService.delete(id)
+    //     .subscribe(res => {
+    //       if (res.success) {
+    //         this.router.navigate(['articles']);
+    //       }
+    //     });
+    // });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.article = this.articleService.get(params['id']).subscribe((result: any) => {
-        this.article = result
-      });
+      this.actions.loadItemEdit(params['id'])
     });
-  }
-
+  };
 }
+

@@ -11,7 +11,7 @@ export class DeleteComponent implements OnInit {
 
   @Input() article: IArticle;
 
-  delete = (id) => (this.actions.deleteItem(id))
+  delete = (id) => (this.actions.deleteItem(id, "articles/"))
 
   constructor(private actions: ArticleAPIActions) { }
 
