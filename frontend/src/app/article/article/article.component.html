@@ -1,5 +1,5 @@
-<div>{{ id }}</div>
-<a [routerLink]="['/articles', id]">{{ title }}</a>
-<a [routerLink]="['/articles', id, 'edit']">Edit</a>
-<div>{{ content }}</div>
-<app-article-delete [id]="id"></app-article-delete>
+<div>{{ article.id }}</div>
+<a [routerLink]="['/articles', article.id]">{{ article.title }}</a>
+<a [routerLink]="['/articles', article.id, 'edit']">Edit</a>
+<div>{{ article.content }}</div>
+<app-article-delete [article]="article"></app-article-delete>

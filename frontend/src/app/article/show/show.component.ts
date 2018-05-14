@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../services/article.service';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { select$, select } from '@angular-redux/store';
+import { ArticleAPIActions } from '../api/actions';
+import { IArticle } from '../../home/model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
-  styleUrls: ['./show.component.scss']
+  styleUrls: ['./show.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowComponent implements OnInit {
-  public article: any;
-  constructor(private articleService: ArticleService, private route: ActivatedRoute) { }
+  @select(['article', 'show', 'article'])
+  readonly article$: Observable<IArticle>
+
+  constructor(private actions: ArticleAPIActions, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.article = this.articleService.get(params['id']).subscribe((result: any) => {
-        this.article = result
-      });
-    });
+    this.route.params.subscribe(params => this.actions.loadArticle(params['id']));
   }
 }

@@ -11,6 +11,9 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    // "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "pretty": true,
     "lib": [
       "es2017",
       "dom"
