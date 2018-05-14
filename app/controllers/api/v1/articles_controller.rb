@@ -8,4 +8,31 @@ class Api::V1::ArticlesController < Api::V1::Base::AuthorizeController
     article = Article.find params[:id]
     render_success data: Api::V1::ArticleSerializer.new(article)
   end
+
+  def edit
+    article = Article.find params[:id]
+    render_success data: Api::V1::ArticleSerializer.new(article)
+  end
+
+  def update
+    article = current_user.articles.find params[:id]
+    article.update! article_params
+    render_success data: Api::V1::ArticleSerializer.new(article)
+  end
+
+  def create
+    article = current_user.articles.create! article_params
+    render_success data: Api::V1::ArticleSerializer.new(article)
+  end
+
+  def destroy
+    article = Article.find params[:id]
+    article.destroy!
+    render_success
+  end
+
+  private
+  def article_params
+    params.permit(:id, :title, :content)
+  end
 end

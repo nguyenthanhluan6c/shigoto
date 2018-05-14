@@ -1,0 +1,19 @@
+<p>
+  new works!
+</p>
+<div class="example-container">
+  <form class="example-container" [formGroup]="myForm" (ngSubmit)="create(myForm)">
+
+    <mat-form-field [hideRequiredMarker]="myForm.value.hideRequired" [floatLabel]="myForm.value.floatLabel">
+      <input matInput placeholder="Simple placeholder" required formControlName="title" #title </mat-form-field>
+
+      <mat-form-field [floatLabel]="myForm.value.floatLabel">
+        <mat-label>Both a label and a placeholder</mat-label>
+        <input matInput placeholder="Simple placeholder" formControlName="content" #content>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-raised-button>Submit</button>
+      </div>
+  </form>
+</div>

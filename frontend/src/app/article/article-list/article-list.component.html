@@ -1,0 +1,14 @@
+<p>
+  article-list works!
+
+  <ng-template #loading>
+    <app-spinner *ngIf="loading">
+    </app-spinner>
+    <div>Loading...</div>
+  </ng-template>
+
+  <ng-template [ngIf]="articles" [ngIfElse]="loading">
+    <app-article *ngFor="let article of articles" [id]="article.id" [title]="article.title" [content]="article.content"></app-article>
+  </ng-template>
+
+</p>
