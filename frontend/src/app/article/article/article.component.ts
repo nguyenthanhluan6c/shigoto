@@ -1,5 +1,6 @@
 import { Input, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IArticle } from '../../home/model';
 
 @Component({
   selector: 'app-article',
@@ -8,10 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ArticleComponent implements OnInit {
 
-  @Input("id") readonly id: string;
-  @Input("title") readonly title: string;
-  @Input("content") readonly content: string;
-
+  @Input() readonly article: IArticle;
   constructor() { }
 
   ngOnInit() {

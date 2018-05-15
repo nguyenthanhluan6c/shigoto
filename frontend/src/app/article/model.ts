@@ -14,7 +14,7 @@ export interface IArticleList {
 }
 
 export interface IArticle {
-  id: string;
+  id: number;
   title: string;
   content: string;
 }

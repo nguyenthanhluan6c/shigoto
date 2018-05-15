@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ArticleService } from '../services/article.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { IArticle } from '../model';
+import { ArticleAPIActions } from '../api/actions';
 
 @Component({
   selector: 'app-article-delete',
@@ -10,28 +9,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class DeleteComponent implements OnInit {
 
-  @Input() id: any;
-  @Output() deleteEvent = new EventEmitter<string>();
+  @Input() article: IArticle;
 
-  callParent() {
-    this.deleteEvent.next(this.id);
-  }
+  delete = (id) => (this.actions.deleteItem(id))
 
-  constructor(private articleService: ArticleService, private route: ActivatedRoute,
-    private router: Router) { }
+  constructor(private actions: ArticleAPIActions) { }
 
-  ngOnInit() {
-  }
-
-
-  delete() {
-    this.articleService.delete(this.id)
-      .subscribe(res => {
-        if (res.success) {
-          this.callParent();
-          this.router.navigate(['articles']);
-        }
-      });
-  }
-
+  ngOnInit() { }
 }

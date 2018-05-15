@@ -1,6 +1,9 @@
 <p>
   show works!
 </p>
-<div>{{ article.id }}</div>
-<div>{{ article.title }}</div>
-<div>{{ article.content }}</div>
+
+<ng-container *ngIf="article$ | async ; let current_article">
+  <div>{{ current_article.id}}</div>
+  <div>{{ current_article.title }}</div>
+  <div>{{ current_article.content }}</div>
+</ng-container>

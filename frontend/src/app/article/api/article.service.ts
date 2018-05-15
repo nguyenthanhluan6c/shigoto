@@ -7,7 +7,6 @@ import { BackendApiService } from '../../base-api/backend-api-service';
 
 @Injectable()
 export class ArticleService extends BackendApiService {
-  private subject = new Subject<any>();
 
   getAll(): Observable<IArticle[]> {
     return this.http.get(`/articles`)
@@ -15,7 +14,7 @@ export class ArticleService extends BackendApiService {
       .catch(this.errorHandler.handle)
   }
 
-  get(id) {
+  get(id): Observable<IArticle> {
     return this.http.get(`/articles/${id}`)
       .map((response: IArticleResponse) => response.data)
       .catch(this.errorHandler.handle)
@@ -35,14 +34,6 @@ export class ArticleService extends BackendApiService {
 
   delete(id) {
     return this.http.delete(`/articles/${id}`)
-      .map(res => {
-        this.subject.next(id)
-        return res;
-      })
       .catch(this.errorHandler.handle)
-  }
-
-  getSubject(): Observable<any> {
-    return this.subject.asObservable();
   }
 }
