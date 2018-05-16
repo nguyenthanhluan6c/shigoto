@@ -1,44 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../api/article.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ArticleAPIActions } from '../api/actions';
 
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html',
-  styleUrls: ['./new.component.scss']
+  styleUrls: ['./new.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewComponent implements OnInit {
-  myForm: FormGroup;
-  article: {};
 
-  constructor(private articleService: ArticleService, private route: ActivatedRoute,
-    private router: Router, private fb: FormBuilder) {
-    this.createForm();
+  constructor(private actions: ArticleAPIActions) {
 
-  }
-
-  createForm() {
-    this.myForm = this.fb.group({
-      title: ['', Validators.required],
-      content: ['']
-    });
-  }
-
-
-  create(form) {
-    let { title, content } = form.value
-    this.route.params.subscribe(params => {
-      this.articleService.create(title, content)
-        .subscribe(res => {
-          if (res.success) {
-            this.router.navigate(['articles/', res.data.id]);
-          }
-        });
-    });
   }
 
   ngOnInit() {
   }
 
+  submit(form) {
+    this.actions.submitFormNew(form.value)
+  }
 }
